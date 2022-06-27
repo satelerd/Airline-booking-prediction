@@ -36,10 +36,10 @@ modelos supervisados utilizados (1 por cada integrante del grupo), la selección
 empleado.
 
 Los puntajes asignados a cada tarea corresponden a:
-• Limpieza de datos (1.0 punto, código y justificación)
-• Modelo de clasificación, uno por cada integrante (2.5 punto, código y justificación)
-• Selección del modelo final (1.0 puntos, código y justificación)
-• Evaluación de la segunda base de datos basado en la variable binaria no-show (1.5 puntos,
+- Limpieza de datos (1.0 punto, código y justificación)
+- Modelo de clasificación, uno por cada integrante (2.5 punto, código y justificación)
+- Selección del modelo final (1.0 puntos, código y justificación)
+- Evaluación de la segunda base de datos basado en la variable binaria no-show (1.5 puntos,
 código y justificación).
 
 Además, para la evaluación de la segunda base de datos, usted deberá generar un archivo CSV con una
