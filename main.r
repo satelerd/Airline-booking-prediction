@@ -100,7 +100,7 @@ NBf1_score <- 2*(NBprecision*NBrecall)/(NBprecision+NBrecall)
 
 # Tercer modelo: KNN
 # ----------------------------------------
-KNNmodel <- kknn(data_train$Key ~ ., data_train, k = 5)
+KNNmodel <- kknn(data_train$Key ~ .,test = data_test, data_train, k = 5)
 
 # Generamos la prediccion
 KNNpredictions <- predict(KNNmodel, data_test)
