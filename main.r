@@ -5,7 +5,7 @@
 
 
 # Carga de la data
-setwd("C:/Users/sdiaz/OneDrive/Escritorio/R/Airline-booking-prediction")
+# setwd("")     # Aqui se cambia el directorio de trabajo
 data <- read.csv("ALUMNOS-trainData.csv")
 data_eval <- read.csv("ALUMNOS-evalData.csv")
 
@@ -83,10 +83,10 @@ names(cluster)
 sumbt<- kmeans(data_train, centers = 10)$betweenss
 sumbt2<- kmeans(data_train, centers = 10)$tot.withinss
 
-Bmodel <- naive_bayes(data_train$Key ~ ., data_train)
+NBmodel <- naive_bayes(data_train$Key ~ ., data_train)
 
 # Generamos la prediccion
-NBpredictions <- predict(Bmodel, data_test)
+NBpredictions <- predict(NBmodel, data_test)
 NBconfusion_matrix <- table(data_test$Key, NBpredictions)
 
 # Generamos la accuracy, precision, recall y f1
@@ -122,7 +122,7 @@ KNNf1_score <- 2*(KNNprecision*KNNrecall)/(KNNprecision+KNNrecall)
 
 # Procedimientos finales
 # Procedemos a extrapolar el modelo con el data_eval, creando una nueva columna con el resultado presupuestado
-data_eval$Key <- predict(Bmodel, data_eval)
+data_eval$Key <- predict(NBmodel, data_eval)
 
 # Se guardan los resultados en un archivo csv
 write.csv(data_eval$Key, "resultados.csv", row.names = FALSE)
