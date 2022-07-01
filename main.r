@@ -1,3 +1,5 @@
+# Minería de Datos / 2022-01
+# Prediciendo sobreventa de asientos en industria Aérea
 # Grupo numero 7
 # Conformado por: Daniel Sateler, Valentina Kaufmann y Sebastian Diaz
 
@@ -60,16 +62,16 @@ data_test$Key <- factor(data_test$Key)
 
 # Primer modelo: Regresion Logistica
 # ----------------------------------------
-model <- lm(data_train$Key ~ ., data_train)
+LRmodel <- lm(data_train$Key ~ ., data_train)
 
 # Generamos las predicciones
-predictions <- predict(model, data_test)
+predictions <- predict(LRmodel, data_test)
 
 # Generamos la matriz de confusion, accuracy, precision, recall y f1
-confusion_matrix <- table(data_test$Key, predictions)
-LRaccuracy <- sum(diagonal(confusion_matrix))/sum(confusion_matrix)
-LRprecision <- confusion_matrix[1,1]/(confusion_matrix[1,1]+confusion_matrix[1,2])
-LRrecall <- confusion_matrix[1,1]/(confusion_matrix[1,1]+confusion_matrix[2,1])
+LRconfusion_matrix <- table(data_test$Key, predictions)
+LRaccuracy <- sum(diagonal(LRconfusion_matrix))/sum(LRconfusion_matrix)
+LRprecision <- LRconfusion_matrix[1,1]/(LRconfusion_matrix[1,1]+LRconfusion_matrix[1,2])
+LRrecall <- LRconfusion_matrix[1,1]/(LRconfusion_matrix[1,1]+LRconfusion_matrix[2,1])
 LRf1_score <- 2*(LRprecision*LRrecall)/(LRprecision+LRrecall)
 # ----------------------------------------
 
@@ -80,10 +82,11 @@ cluster<- kmeans(data_train, centers = 2, nstart = 15)
 names(cluster)
 sumbt<- kmeans(data_train, centers = 10)$betweenss
 sumbt2<- kmeans(data_train, centers = 10)$tot.withinss
-modelo <- naive_bayes(data_train$Key ~ ., data_train)
+
+Bmodel <- naive_bayes(data_train$Key ~ ., data_train)
 
 # Generamos la prediccion
-NBpredictions <- predict(modelo, data_test)
+NBpredictions <- predict(Bmodel, data_test)
 NBconfusion_matrix <- table(data_test$Key, NBpredictions)
 
 # Generamos la accuracy, precision, recall y f1
@@ -91,7 +94,7 @@ NBaccuracy <- sum(diagonal(NBconfusion_matrix))/sum(NBconfusion_matrix)
 NBprecision <- NBconfusion_matrix[1,1]/(NBconfusion_matrix[1,1]+NBconfusion_matrix[1,2])
 NBrecall <- NBconfusion_matrix[1,1]/(NBconfusion_matrix[1,1]+NBconfusion_matrix[2,1])
 NBf1_score <- 2*(NBprecision*NBrecall)/(NBprecision+NBrecall)
-#Se consiguen muy buenos puntajes con NaiveBayes
+# Se consiguen muy buenos puntajes con NaiveBayes
 # ----------------------------------------
 
 
@@ -119,7 +122,7 @@ KNNf1_score <- 2*(KNNprecision*KNNrecall)/(KNNprecision+KNNrecall)
 
 # Procedimientos finales
 # Procedemos a extrapolar el modelo con el data_eval, creando una nueva columna con el resultado presupuestado
-data_eval$Key <- predict(modelo, data_eval)
+data_eval$Key <- predict(Bmodel, data_eval)
 
 # Se guardan los resultados en un archivo csv
 write.csv(data_eval$Key, "resultados.csv", row.names = FALSE)
